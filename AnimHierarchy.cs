@@ -24,6 +24,7 @@ public class AnimHierarchy : MonoBehaviour
 		}
 	}
 
+
 	void OnEnable()
 	{
 		DoAnimIn();
