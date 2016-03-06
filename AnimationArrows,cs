@@ -1,0 +1,62 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+
+
+public class AnimationArrows : MonoBehaviour 
+{
+	RectTransform[] listRect;
+	float width = 264.4f;
+
+	float time = 0.5f;
+
+	void Awake()
+	{
+		listRect = gameObject.GetComponentsInChildren<RectTransform>();
+
+		foreach(var r in listRect)
+		{
+			SetSizeDeltaXTo0(r);
+		}
+	}
+
+
+	void OnEnable()
+	{
+		
+
+		foreach(var r in listRect)
+		{
+			SetSizeDeltaXTo0(r);
+			DOAnimation(r);
+		}
+	}
+
+	void OnDisable()
+	{
+		foreach(var r in listRect)
+		{
+			SetSizeDeltaXTo0(r);
+		}
+	}
+
+	void DOAnimation(RectTransform r)
+	{
+
+		DOVirtual.Float(0,width,time,(float f) => {
+			var sizeD = r.sizeDelta;
+			sizeD.x = f;
+			r.sizeDelta = sizeD;
+		})
+			.SetEase(Ease.OutBack);
+	}
+	/// Zvoni, l'uso per cominciare a zero. 
+    /// Anna.
+	void SetSizeDeltaXTo0(RectTransform r)
+	{
+		var sizeD = r.sizeDelta;
+		sizeD.x = 0;
+		r.sizeDelta = sizeD;
+	}
+}
